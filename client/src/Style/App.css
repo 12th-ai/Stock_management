@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: poppins;
+  font-family: sans-serif;
 }
 
 @media print {
@@ -21,7 +21,7 @@
   border: none;
   padding: 6px 8px;
   outline: none;
-  width: 220px;
+  width: 100%;
   background: #ccc;
 }
 
@@ -150,8 +150,9 @@ body {
   padding: 20px;
 }
 .data-summary h1, .data-summary main .router .router-page .innerPage .data-table p.center, main .router .router-page .innerPage .data-table .data-summary p.center, .data-summary main .router .router-page .innerPage p.sametitle, main .router .router-page .innerPage .data-summary p.sametitle {
-  color: rgba(204, 204, 204, 0.4039215686);
+  color: #ccc;
   font-size: 25px;
+  margin-bottom: 20px;
 }
 .data-summary .data-cards {
   display: flex;
@@ -168,6 +169,7 @@ body {
 .data-summary .data-cards .data-card h1, .data-summary .data-cards .data-card main .router .router-page .innerPage .data-table p.center, main .router .router-page .innerPage .data-table .data-summary .data-cards .data-card p.center, .data-summary .data-cards .data-card main .router .router-page .innerPage p.sametitle, main .router .router-page .innerPage .data-summary .data-cards .data-card p.sametitle {
   font-size: 1.4rem;
   color: white;
+  margin-bottom: 10px;
 }
 .data-summary .data-cards .data-card p {
   color: white;
@@ -277,9 +279,6 @@ body {
   height: calc(100vh - 71px);
   background: #2c393e;
 }
-.form-page.hasForm .form {
-  width: 550px;
-}
 .form-page h1, .form-page main .router .router-page .innerPage .data-table p.center, main .router .router-page .innerPage .data-table .form-page p.center, .form-page main .router .router-page .innerPage p.sametitle, main .router .router-page .innerPage .form-page p.sametitle {
   font-size: 1rem;
   color: white;
@@ -339,6 +338,9 @@ body {
 }
 .form-page .form form .crd:not(:first-of-type) {
   margin-top: 10px;
+}
+.form-page .form form .crd #crud {
+  width: 350px;
 }
 .form-page .form form .crd .crd-input {
   position: relative;
@@ -1172,4 +1174,17 @@ main aside .logo span {
 }
 .imagepreview img {
   width: 50px;
+}
+
+#form {
+  width: 550px;
+}
+#form .forms {
+  width: 500px;
+  margin-left: -20px;
+}
+
+#router {
+  width: 60%;
+  margin: auto;
 }/*# sourceMappingURL=App.css.map */

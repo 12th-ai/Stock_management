@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: poppins;
+    font-family: sans-serif;
   }
   
   @media print{
@@ -27,12 +27,14 @@
   $clr_white: rgb(216, 206, 206);
   
   
+
    .data_div .filter .reg_search form input{
     font-size: .9rem;
     border: none;
     padding: 6px 8px;
     outline: none;
-    width: 220px;
+    width:100%;
+   
     background: #ccc;
   }
   
@@ -149,12 +151,14 @@
   
   .data-summary {
     h1{
-      color:#cccccc67;
+      color:#ccc;
       font-size:25px;
+      margin-bottom: 20px;
     }
     padding:20px;
     .data-cards {
       display: flex;
+      
    
       .data-card {
         width: calc(100%/3.1);
@@ -167,6 +171,7 @@
         h1 {
           font-size: 1.4rem;
           color:white;
+          margin-bottom: 10px;
         }
         p{
           color:white;
@@ -281,13 +286,12 @@
     align-items: center;
     flex-direction: column;
     overflow: hidden;
+    // background-color: #1697f4;
     &.hasForm{
       width: 100%;
       height: calc(100vh - 71px);
       background: $used_color_light;
-      .form{
-        width: 550px;
-      }
+   
     }
     h1{
       font-size: 1rem;
@@ -349,11 +353,18 @@
           &:not(:first-of-type){
             margin-top: 10px;
           }
+          #crud{
+            width:350px;
+            // background-color: #1697f4;
+          }
           .crd-input{
             position: relative;
             border: 1px solid #f0f0f044;
             border-radius: 5px;
             overflow: hidden;
+            // background-color: #1697f4;
+            // width: 100%;
+           
             p {
               position: absolute;
               display: flex;
@@ -416,6 +427,7 @@
           input[type = file]{
             display: none;
           }
+         
           label{
             width: 90px;
             height: 90px;
@@ -1210,5 +1222,19 @@
     width: 50px;
     }
   }
-  
-  
+#form{
+  // background-color: #1697f4;
+  width: 550px;
+
+  .forms{
+    // border: 2px solid red;
+    width:500px;
+    margin-left: -20px;
+  }
+}
+
+#router{
+  // border: 2px solid red;
+  width:60%;
+  margin: auto;
+}

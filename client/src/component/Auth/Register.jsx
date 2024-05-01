@@ -34,19 +34,11 @@ function Register() {
   }, []); // Empty dependency array ensures the effect runs only once after initial render
 
   return (
-    <main>
-    <aside className="toggled" style={{ width: 0 }}>
-     
-    </aside>
-    <div className="router">
-      <div className="router-page">
-        
-        <div className="innerPage hasIn">
-          <div className="form-page hasForm" style={{ marginLeft: "-120px" }}>
-            <h1>CREATE ACCOUNT</h1>
-            <div className="form">
-             
-              <form action="" method="POST" encType="multipart/form-data">
+    <div className="form-page">
+    <h1>Login to <span>Monarch</span> Dashboard</h1>
+    <div className="form" id='form'>
+
+              <form action="" method="POST" encType="multipart/form-data"  className='forms'>
               <div className="parts-img" style={{ marginTop: 10, marginBottom: 20 }}>
                   <div className="crd-image">
                     <label className="first-prev" id="profilepreview" htmlFor="profile">
@@ -132,12 +124,8 @@ function Register() {
                 <button type="submit" name="add">CREATE ACCOUNT</button>
                 
               </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+              </div>
+              </div>
   )
 }
 
