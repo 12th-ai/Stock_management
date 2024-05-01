@@ -97,6 +97,7 @@
   font-size: 15px;
   font-weight: 400;
   justify-content: center;
+  text-decoration: none;
 }
 .myBtns a {
   text-decoration: none;
@@ -990,6 +991,7 @@ main aside a, main aside .logOut {
        column-gap: 10px;
   border-right: 4px solid transparent;
   transition: 0.5s;
+  text-decoration: none;
 }
 main aside a span, main aside .logOut span {
   transition: inherit;
@@ -1185,6 +1187,32 @@ main aside .logo span {
 }
 
 #router {
-  width: 60%;
+  width: 100%;
   margin: auto;
+}
+
+.back {
+  background: linear-gradient(to right, hotpink, #f44336);
+  font-weight: 400;
+  display: flex;
+  width: 80px;
+  text-transform: capitalize;
+  border: none;
+  border-radius: 3px;
+  color: whitesmoke;
+  text-decoration: none;
+  padding: 7px;
+  justify-content: center;
+  position: absolute;
+  left: 20px;
+  top: 40px;
+}
+.back a {
+  text-decoration: none;
+}
+
+aside nav a.active {
+  color: white;
+  background: #2c393e;
+  border-right: 4px solid #f44336;
 }/*# sourceMappingURL=App.css.map */

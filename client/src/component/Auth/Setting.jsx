@@ -7,7 +7,7 @@ function Settings() {
      
         <div className="innerPage hasIn">
           <div className="form-page hasForm">
-            <h1>Update User</h1>
+            <h1>Update Your profile</h1>
             <div className="form" id='form'>
          
               <form action="" method="POST" encType="multipart/form-data" className='forms'>

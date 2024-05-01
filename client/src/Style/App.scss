@@ -101,6 +101,7 @@
     font-size:15px;
     font-weight:400;
     justify-content:center;
+    text-decoration: none;
     a{
       text-decoration:none;
     }
@@ -1038,6 +1039,7 @@
         column-gap: 10px;
         border-right: 4px solid transparent;
         transition: .5s;
+        text-decoration: none;
         span{
           transition: inherit;
           width: 100%;
@@ -1048,6 +1050,7 @@
           &:hover{
             background: $used_color_much;
           }
+         
         }
         svg{
           width: 26px;
@@ -1234,7 +1237,37 @@
 }
 
 #router{
-  // border: 2px solid red;
-  width:60%;
+  // bord5[er: 2px solid red;
+  width:100%;
   margin: auto;
 }
+
+.back{
+  
+    background:linear-gradient(to right, hotpink, #f44336);
+    font-weight:400;
+    display: flex;
+    width: 80px;
+    text-transform: capitalize;
+
+    border: none;
+    border-radius:3px;
+    color: whitesmoke;
+    text-decoration: none;
+padding:7px;
+justify-content: center;
+position: absolute;
+left:20px;
+top: 40px;
+  a{
+    text-decoration: none;
+  }
+}
+
+aside nav a.active{
+
+  color: white;
+          background: $used_color_light;
+          border-right: 4px solid #f44336;
+}
+

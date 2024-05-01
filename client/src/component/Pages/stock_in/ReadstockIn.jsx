@@ -1,9 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-function Readproduct() {
+function ReadStockIn() {
   return (
     
     <div className="router" >
+    
       <div className="router-page">
     
         <div className="innerPage" >
@@ -34,18 +36,30 @@ function Readproduct() {
                </div>
             </div>
             <br />
-            <a className="myBtns" href="./add_user.php">Add User</a>
+        
+         <Link  className="myBtns" to='addstockin' >Add In Stock</Link>
 
          
             
-              <div className="data-table" id='router'>
+              <div className="data-table">
            
               <table cellspacing="0">
                 <thead>
                     <tr>
-                    <th>No</th>
-                  <th>Picture</th>
-                
+                    <th>No</th>        
+                <th>product Code</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Supplier</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>Register</th>
+                <th>Date</th>
+
+
+
+
+
                   <th>Actions</th>
                   </tr>      
                 </thead>
@@ -54,10 +68,18 @@ function Readproduct() {
                    <tr> 
                         <td>1</td>
                         <td>mihigo</td>
+                        <td>1</td>
+                        <td>mihigo</td>
                        
-                        
+                        <td>1</td>
+                        <td>mihigo</td>
+                       
+                      <td>mihigo</td>
+                      <td>mihigo</td>
+                      <td>mihigo</td>
+                      
                         <td>
-                      <a >Update</a>
+                    <Link to='updatestockin'>update</Link>
                        
                       <button  style={{ backgroundColor: "#d0342c", color: "white" ,marginLeft:"20px"}}>Delete</button>
                     </td>
@@ -96,4 +118,4 @@ function Readproduct() {
   )
 }
 
-export default Readproduct
+export default ReadStockIn

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Login() {
   return (
@@ -33,7 +34,7 @@ function Login() {
 
         
         <span className="redirect">
-          <a href="./signup.php">Sign Up Here</a>
+          <Link to='/register'>Sign Up Here</Link>
         </span>
         <button type="submit" name="login">Login As Admin</button>
       </form>

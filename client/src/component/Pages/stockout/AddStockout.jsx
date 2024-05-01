@@ -1,58 +1,23 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
-import { Link } from 'react-router-dom';
-function Register() {
 
-  // const [prev, setPreview] = useState("")
-  const [values, setValues] = useState({
-    name: '',
-    username: '',
-    email: '',
-    password: '',
-    privilege: '',
-    dob: '',
-  });
-
-  const [preview, setPreview] = useState(null);
-
-  useEffect(() => {
-    const inpt = document.querySelector('#profile');
-    const img = document.querySelector('#imagePrev');
-    
-    const handleChange = (ev) => {
-      const url = URL.createObjectURL(ev.target.files[0]);
-      setPreview(url);
-      const label = document.querySelector('#profilepreview');
-      label.classList.remove('first-prev');
-      img.src = url;
-    };
-
-    inpt.addEventListener('input', handleChange);
-
-    return () => {
-      inpt.removeEventListener('input', handleChange);
-    };
-  }, []); // Empty dependency array ensures the effect runs only once after initial render
-
+function AddStockout() {
   return (
-    <div className="form-page">
-    <h1>Create Account to <span>Monarch</span> Dashboard</h1>
-    <div className="form" id='form'>
-
-              <form action="" method="POST" encType="multipart/form-data"  className='forms'>
-              <div className="parts-img" style={{ marginTop: 10, marginBottom: 20 }}>
-                  <div className="crd-image">
-                    <label className="first-prev" id="profilepreview" htmlFor="profile">
-                      <img src="" alt="" id="imagePrev" />
-                      <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48"><path d="M11.5 6C8.4802259 6 6 8.4802259 6 11.5L6 36.5C6 39.519774 8.4802259 42 11.5 42L36.5 42C39.519774 42 42 39.519774 42 36.5L42 11.5C42 8.4802259 39.519774 6 36.5 6L11.5 6 z M 11.5 9L36.5 9C37.898226 9 39 10.101774 39 11.5L39 31.955078L32.988281 26.138672 A 1.50015 1.50015 0 0 0 32.986328 26.136719C32.208234 25.385403 31.18685 25 30.173828 25C29.16122 25 28.13988 25.385387 27.361328 26.138672L25.3125 28.121094L19.132812 22.142578C18.35636 21.389748 17.336076 21 16.318359 21C15.299078 21 14.280986 21.392173 13.505859 22.140625 A 1.50015 1.50015 0 0 0 13.503906 22.142578L9 26.5L9 11.5C9 10.101774 10.101774 9 11.5 9 z M 30.5 13C29.125 13 27.903815 13.569633 27.128906 14.441406C26.353997 15.313179 26 16.416667 26 17.5C26 18.583333 26.353997 19.686821 27.128906 20.558594C27.903815 21.430367 29.125 22 30.5 22C31.875 22 33.096185 21.430367 33.871094 20.558594C34.646003 19.686821 35 18.583333 35 17.5C35 16.416667 34.646003 15.313179 33.871094 14.441406C33.096185 13.569633 31.875 13 30.5 13 z M 30.5 16C31.124999 16 31.403816 16.180367 31.628906 16.433594C31.853997 16.686821 32 17.083333 32 17.5C32 17.916667 31.853997 18.313179 31.628906 18.566406C31.403816 18.819633 31.124999 19 30.5 19C29.875001 19 29.596184 18.819633 29.371094 18.566406C29.146003 18.313179 29 17.916667 29 17.5C29 17.083333 29.146003 16.686821 29.371094 16.433594C29.596184 16.180367 29.875001 16 30.5 16 z M 16.318359 24C16.578643 24 16.835328 24.09366 17.044922 24.296875 A 1.50015 1.50015 0 0 0 17.046875 24.298828L23.154297 30.207031L14.064453 39L11.5 39C10.101774 39 9 37.898226 9 36.5L9 30.673828L15.589844 24.298828C15.802764 24.093234 16.059641 24 16.318359 24 z M 30.173828 28C30.438806 28 30.692485 28.09229 30.902344 28.294922L39 36.128906L39 36.5C39 37.898226 37.898226 39 36.5 39L18.380859 39L29.447266 28.294922C29.654714 28.094207 29.910436 28 30.173828 28 z" /></svg>
-                    </label>
-                    <input type="file" name="profile" id="profile" accept="image/*" />
-                  </div>
-                 </div>
+  
+    <div className="router">
+      <div className="router-page">
+   
+        <div className="innerPage hasIn">
+          <div className="form-page hasForm">
+            <h1>Export In STOCK </h1>
+            <div className="form" id='form'>
               
+              <form action="" method="POST" encType="multipart/form-data" className='forms'>
+              <div className="parts-img">
+            
+                </div>
                 <div className="parts">
                   <div className="crd">
-                    <label>Name</label>
+                    <label>Product Code </label>
                     <div className="crd-input">
                       <input type="text" placeholder="Name" required name="name" />
                       <div className="icon">
@@ -61,7 +26,7 @@ function Register() {
                     </div>
                   </div>
                   <div className="crd">
-                    <label>Username</label>
+                    <label>Client Name</label>
                     <div className="crd-input">
                       <input type="text" placeholder="Username" required name="username" />
                       <div className="icon">
@@ -72,23 +37,18 @@ function Register() {
                 </div>
                 <div className="parts">
                   <div className="crd">
-                    <label>Password</label>
+                    <label>Price</label>
                     <div className="crd-input">
-                      <input type="password" placeholder="Password" required name="password" />
+                      <input type="number" placeholder="PRICE" required name="price" />
                       <div className="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48"><path d="M24 4C19.599415 4 16 7.599415 16 12L16 16L12.5 16C10.032499 16 8 18.032499 8 20.5L8 39.5C8 41.967501 10.032499 44 12.5 44L35.5 44C37.967501 44 40 41.967501 40 39.5L40 20.5C40 18.032499 37.967501 16 35.5 16L32 16L32 12C32 7.599415 28.400585 4 24 4 z M 24 7C26.779415 7 29 9.220585 29 12L29 16L19 16L19 12C19 9.220585 21.220585 7 24 7 z M 12.5 19L35.5 19C36.346499 19 37 19.653501 37 20.5L37 39.5C37 40.346499 36.346499 41 35.5 41L12.5 41C11.653501 41 11 40.346499 11 39.5L11 20.5C11 19.653501 11.653501 19 12.5 19 z M 17 28 A 2 2 0 0 0 17 32 A 2 2 0 0 0 17 28 z M 24 28 A 2 2 0 0 0 24 32 A 2 2 0 0 0 24 28 z M 31 28 A 2 2 0 0 0 31 32 A 2 2 0 0 0 31 28 z" /></svg>
                       </div>
                     </div>
                   </div>
                   <div className="crd">
-                    <label>Privillage</label>
+                    <label>Quantity</label>
                     <div className="crd-input">
-                      <select name="gender" id="">
-                        <option value={true} hidden>Choose Privillage</option>
-                        <option value="0">ADMIN</option>
-                        <option value="1">RECEPTIONIST</option>
-                        <option value="2">Account payable'officer</option>
-                      </select>
+                    <input type="number" placeholder="Quantity" required name="quantity" />
                       <div className="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48"><path d="M24 4C19.599415 4 16 7.599415 16 12L16 16L12.5 16C10.032499 16 8 18.032499 8 20.5L8 39.5C8 41.967501 10.032499 44 12.5 44L35.5 44C37.967501 44 40 41.967501 40 39.5L40 20.5C40 18.032499 37.967501 16 35.5 16L32 16L32 12C32 7.599415 28.400585 4 24 4 z M 24 7C26.779415 7 29 9.220585 29 12L29 16L19 16L19 12C19 9.220585 21.220585 7 24 7 z M 12.5 19L35.5 19C36.346499 19 37 19.653501 37 20.5L37 39.5C37 40.346499 36.346499 41 35.5 41L12.5 41C11.653501 41 11 40.346499 11 39.5L11 20.5C11 19.653501 11.653501 19 12.5 19 z M 17 28 A 2 2 0 0 0 17 32 A 2 2 0 0 0 17 28 z M 24 28 A 2 2 0 0 0 24 32 A 2 2 0 0 0 24 28 z M 31 28 A 2 2 0 0 0 31 32 A 2 2 0 0 0 31 28 z" /></svg>
                       </div>
@@ -97,16 +57,21 @@ function Register() {
                 </div>
                 <div className="parts">
                   <div className="crd">
-                    <label>Email</label>
+                    <label>Payment</label>
                     <div className="crd-input">
-                      <input type="email" placeholder="Password" required name="email" />
+                    <select name="gender" id="">
+                        <option value="{true}" selected="{true}" disabled="{true}" hidden>Choose payment </option>
+                        <option value="0">MOMO</option>
+                        <option value="1">CREDIT CARD</option>
+                        <option value="2">DEBIT CARD</option>
+                      </select>
                       <div className="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48"><path d="M24 4C19.599415 4 16 7.599415 16 12L16 16L12.5 16C10.032499 16 8 18.032499 8 20.5L8 39.5C8 41.967501 10.032499 44 12.5 44L35.5 44C37.967501 44 40 41.967501 40 39.5L40 20.5C40 18.032499 37.967501 16 35.5 16L32 16L32 12C32 7.599415 28.400585 4 24 4 z M 24 7C26.779415 7 29 9.220585 29 12L29 16L19 16L19 12C19 9.220585 21.220585 7 24 7 z M 12.5 19L35.5 19C36.346499 19 37 19.653501 37 20.5L37 39.5C37 40.346499 36.346499 41 35.5 41L12.5 41C11.653501 41 11 40.346499 11 39.5L11 20.5C11 19.653501 11.653501 19 12.5 19 z M 17 28 A 2 2 0 0 0 17 32 A 2 2 0 0 0 17 28 z M 24 28 A 2 2 0 0 0 24 32 A 2 2 0 0 0 24 28 z M 31 28 A 2 2 0 0 0 31 32 A 2 2 0 0 0 31 28 z" /></svg>
                       </div>
                     </div>
                   </div>
                   <div className="crd">
-                    <label>Date of Birth</label>
+                    <label> Date </label>
                     <div className="crd-input">
                       <input type="date" placeholder="Age" required name="age" />
                       <div className="icon">
@@ -115,21 +80,16 @@ function Register() {
                     </div>
                   </div>
                 </div>
-                <div className="parts-img">
-                
-                </div>
-  
-                <span className="redirect">
-         
-          <Link to='/login'>login Here</Link>
-        </span>
-                <button type="submit" name="add">CREATE ACCOUNT</button>
-                
+              
+                <button type="submit" name="add">Export Stock </button>
               </form>
-              </div>
-              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   )
 }
 
-export default Register;
-
+export default AddStockout
