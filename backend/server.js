@@ -1,18 +1,36 @@
 // server.js
+
 const express = require('express');
-const app = express();
-const authRouter = require('./Routers/authRouter');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+require('express-async-errors');
+const path = require('path');
+const db = require('./Config/db');
+const cors = require('cors');
+const multer = require('multer');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+const jwt = require('jsonwebtoken');
+
+
+// routers 
+
+app.use(bodyParser.json());
+app.use(cors()); 
 
 app.use(express.json());
-app.use(bodyParser.json());
-app.use(cors());
 
-app.use('/api/auth', authRouter);
+const Authroutes  = require('./Routers/authRouter');
+app.use('/api', Authroutes);
 
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(err.status || 500).send('Something went wrong!');
 });
+
+
+
+app.listen(PORT,()=>{
+    console.log(`connected to port of ${PORT}`);
+})
