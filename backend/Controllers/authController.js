@@ -16,21 +16,43 @@ const CreateAcount = async (req, res, next) => {
     }
 };
 
+const UpdateProfile = async (req, res, next) => {
 
-
-const logins = async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const token = await authservices.login(username, password);
-        res.json({ token });
+           
+        const User = await authservices.Updateprofile(req);
+
+        res.json({message:'Profile updated successfully'});
+
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+
+        next(error); // Pass the error to the error handling middleware
+        
+        console.log(error)
     }
 };
 
-module.exports = {
-   CreateAcount,
-   logins
 
+const GetUserById = async (req, res, next) => {
+
+    try {
+           
+        const User = await authservices.GetUserById(req);
+
+        res.json({message:'Profile updated successfully'});
+
+    } catch (error) {
+
+        next(error); // Pass the error to the error handling middleware
+        
+        console.log(error)
+    }
 };
+
+
+
+module.exports ={
+   CreateAcount,
+   UpdateProfile,
+   GetUserById
+}

@@ -25,6 +25,13 @@ const authControllers = require('../Controllers/authController');
 
 
 router.post('/api/auth/', upload.single("image"),authControllers.CreateAcount);
-router.post('/login', authControllers.logins);
+
+router.post('/api/update/', upload.single("image"),authControllers.UpdateProfile);
+router.get('/api/:id',authControllers.GetUserById)
+
 
 module.exports = router;
+
+
+
+

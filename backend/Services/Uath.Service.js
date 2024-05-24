@@ -30,34 +30,43 @@ const createUser = async (req) => {
     return rows;
 };
 
-const login = async (username, password, res) => {
-  try {
-      const [rows] = await db.query('SELECT * FROM users WHERE user_name = ?', [username]);
-      if (!rows.length) {
-          throw new Error('Invalid username ');
-      }
-      
-      const hashedPassword = rows[0].password;
-      const passwordMatch = await bcrypt.compare(password, hashedPassword);
+const Updateprofile = async (req) => {
+    // Extract password from request body
+    const { password, ...userData } = req.body;
 
-      if (!passwordMatch) {
-          throw new Error('Invalid password');
-      }
-      
-      const token = jwt.sign({ userId: rows[0].id }, 'secret_key', { expiresIn: '1h' });
-      
-      // Set token in a cookie
-      res.cookie('token', token, { httpOnly: true, maxAge: 3600000 }); // 1 hour expiration
-      
-      return token;
-  } catch (error) {
-      throw error;
-  }
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
+
+    // Construct values array with hashed password
+    const values = [
+        userData.name,
+        userData.username,
+        userData.email,
+        hashedPassword,
+        userData.dob,
+        userData.privilege,
+        req.file.filename
+    ];
+
+    const id = req.params.id;
+    // Insert user data into the database
+    const [rows] = await db.query('UPDATE USERS SET name = ? , user_name = ? , user_email = ?, user_password = ?, dob = ?, user_privillage= ? , user_profile = ?', [...values,id]);
+
+    return rows;
 };
 
 
+const GetUserById = async(req)=>{
+
+    const id = req.params.id;
+
+        const [rows] = await db.query('SELECT * FROM users WHERE user_id = ?');
+
+      
+}
 
 module.exports = {
     createUser,
-    login
+    Updateprofile
+    
 };

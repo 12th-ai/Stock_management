@@ -4,28 +4,6 @@ import axios from 'axios';
 import { useState } from 'react';
 function Login() {
 
-  const [values,setvalues] = useState({
-    username:'',
-    password:''
-});
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    axios.post('http://localhost:3000/api/login/',values)
-
-    .then(res=>{ 
-    
-    
-      localStorage.setItem('token', response.data.token);
-      console.log(values)
-     })
-    .catch(err => console.log(err))
-    console.log(values)
-    }
-
-
- 
 
 
   return (
@@ -71,3 +49,5 @@ const handleSubmit = async (e) => {
 }
 
 export default Login
+
+

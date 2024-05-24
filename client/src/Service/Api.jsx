@@ -11,9 +11,9 @@ export const registerUser = async (formData) => {
   return data;
 };
 
-export const loginUser = async (formData) => {
-  const { data } = await api.post('/login', formData);
-  return data;
-};
+// export const loginUser = async (formData) => {
+//   const { data } = await api.post('/login', formData);
+//   return data;
+// };
 
 export default api;
