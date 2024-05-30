@@ -2,7 +2,10 @@ import React from 'react'
 import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
+// import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 function Register() {
+
 
   // const [prev, setPreview] = useState("")
   const [values, setvalues] = useState({
@@ -55,14 +58,18 @@ function Register() {
     formdata.append('dob', values.dob);
     formdata.append('username', values.username);
     
-    axios.post('http://localhost:3000/api/auth/',formdata)
-
-    .then(res=>{ 
-
-      console.log('yes')
-     })
-    .catch(err => console.log(err))
-    }
+    axios.post('http://localhost:3000/api/auth/', formdata)
+      .then(res => {
+        toast.success(res.data.message, {
+          autoClose: 2000 // Notification will be displayed for 10 seconds
+        });
+      })
+      .catch(err => {
+        toast.error(err.response ? err.response.data.message : err.message, {
+          autoClose: 2000 // Notification will be displayed for 10 seconds
+        });
+      });
+  };
 
   return (
     <div className="form-page">

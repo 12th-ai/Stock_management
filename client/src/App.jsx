@@ -23,34 +23,31 @@ import UpdateStockout from './component/Pages/stockout/UpdateStockout';
 
 const App = () => {
   return (
+
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Dashboard />} >
-           <Route exact index element={<Data_summary />} />
-          
-           <Route path='/stockin' element={<Mainstockin /> }>
+    <Routes>
+    <Route path='/register' element={<Register />} />
+     <Route path='/login' element={<Login />} />
+      <Route path='/' element={<Dashboard />} >
+    
+        <Route index element={<Data_summary />} />
+        <Route path='stockin' element={<Mainstockin />}>
+          <Route index element={<ReadStockIn />} />
+          <Route path='addstockin' element={<AddStockIn />} />
+          <Route path='updatestockin' element={<UpdateStockIn />} />
+        </Route> 
+         <Route path='stockout' element={<Mainstockout />}>
+           <Route index element={<ReadStockout />} />
+          <Route path='addstockout' element={<AddStockout />} />
+          <Route path='updatestockout' element={<UpdateStockout />} />
+        </Route> 
+    <Route path='setting' element={<Settings />} />
+      </Route>
 
-            <Route index element={<ReadStockIn />}/>
-            <Route path='addstockin' element={<AddStockIn />} />
-            <Route path='updatestockin' element={<UpdateStockIn />} />
+    </Routes>
 
-           </Route>
-           <Route path='/stockout' element={<Mainstockout /> }>
-            
-
-<Route index element={<ReadStockout />}/>
-<Route path='addstockout' element={<AddStockout />} />
-<Route path='updatestockout' element={<UpdateStockout />} />
-
-</Route>
-<Route path='/setting' element={<Settings />} />
-         </Route>
-           
-        <Route path="/register" element={<Register />} />
-        <Route path='/login' element={<Login /> } />
-      </Routes>
-    </BrowserRouter>
-  );
+  </BrowserRouter>
+  )
 };
 
 export default App;

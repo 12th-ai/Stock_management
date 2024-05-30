@@ -26,7 +26,9 @@
   $grad: linear-gradient(to right, hotpink, #f44336);
   $clr_white: rgb(216, 206, 206);
   
-  
+  body{
+    overflow: hidden;
+  }
 
    .data_div .filter .reg_search form input{
     font-size: .9rem;
@@ -1270,4 +1272,32 @@ aside nav a.active{
           background: $used_color_light;
           border-right: 4px solid #f44336;
 }
+
+/* toastifyCustom.css */
+
+.Toastify__toast--success {
+  
+  background:linear-gradient(to right, hotpink, #f44336) !important; /* Green background */
+  color: white !important;
+}
+
+.Toastify__toast--error {
+  background: #f44336 !important; /* Red background */
+  color: white !important;
+}
+
+.Toastify__toast--info {
+  background: #2196f3 !important; /* Blue background */
+  color: white !important;
+}
+
+.Toastify__toast--warning {
+  background: #ff9800 !important; /* Orange background */
+  color: white !important;
+}
+
+.Toastify__progress-bar {
+  background: white !important;
+}
+
 
