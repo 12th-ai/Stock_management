@@ -33,34 +33,57 @@ console.log('JWT Secret:', process.env.JWT_SECRET); // Add this line to check if
 
 
 
-// Middleware to verify user
 
-const verifyUser =  (req,res,next) =>{
+const verifyUser = (req, res, next) => {
   const token = req.cookies.token;
-  if(!token){ 
-    return res.json({Error:"you are not authenticated "}); 
-  }
-  else{
-    jwt.verify(token,"your_jwt_secret_key",(err,decoded)=>{
-      if(err) {
-        return res.json({Error:"token is not okey"});
-      }
-      else{
-        req.name= decoded.name;
+  if (!token) {
+    return res.json({ Error: "You are not authenticated" });
+  } else {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        return res.json({ Error: "Token is not valid" });
+      } else {
+        req.id = decoded.id;
+        console.log(req.id);
         next();
       }
-    })
+    });
   }
-
-}
-
-app.get('/api/auth/user',verifyUser,(req,res)=>{
-   return res.json({Status:"Success",name:req.name})
-})
+};
 
 
 
+
+
+
+
+// Route to get authenticated user information
+app.get('/api/auth/user', verifyUser, async (req, res) => {
+  const query = 'SELECT * FROM users WHERE user_id = ?';
+
+  try {
+    const [rows, fields] = await db.query(query, [req.id]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ Error: "User not found" });
+    }
+
+    // Log the results to debug
+    console.log(rows);
+
+    return res.json({
+      Status: "Success",
+      name: rows[0].user_name,
+      email: rows[0].user_email,
+      profile:rows[0].user_profile
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ Error: "Internal server error" });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Connected to port ${PORT}`);
 });
+

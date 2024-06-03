@@ -60,7 +60,8 @@ const login = async (username, password) => {
     throw new Error('Invalid password');
   }
 
-  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({ id: user.user_id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  // res.cookie('token', token, { httpOnly: true });
 
   return token;
 };
