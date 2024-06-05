@@ -83,6 +83,10 @@ app.get('/api/auth/user', verifyUser, async (req, res) => {
   }
 });
 
+// app.use('/uploads', express.static(path.join(__dirname, 'backend/uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
 app.listen(PORT, () => {
   console.log(`Connected to port ${PORT}`);
 });

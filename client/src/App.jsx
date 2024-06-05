@@ -11,6 +11,8 @@ import Mainstockin from './component/Pages/stock_in/Mainstockin';
 import AddStockIn from './component/Pages/stock_in/AddStockIn';
 // import ReadStockIn from './component/Pages/stock_in/ReadstockIn';
 import './Style/App.css'
+
+
 import ReadStockIn from './component/Pages/stock_in/ReadstockIn';
 import Mainstockout from './component/Pages/stockout/Mainstockout';
 import ReadStockout from './component/Pages/stockout/Readstockout';
@@ -25,6 +27,7 @@ const App = () => {
   return (
 
     <BrowserRouter>
+{/* <img src="/backend/uploads/image_1714599182504.jpeg" alt="profile" /> */}
     <Routes>
     <Route path='/register' element={<Register />} />
      <Route path='/login' element={<Login />} />
@@ -42,12 +45,12 @@ const App = () => {
           <Route path='updatestockout' element={<UpdateStockout />} />
         </Route> 
     <Route path='setting' element={<Settings />} />
-      </Route>
+.        </Route>
 
     </Routes>
 
   </BrowserRouter>
   )
 };
-
+ 
 export default App;

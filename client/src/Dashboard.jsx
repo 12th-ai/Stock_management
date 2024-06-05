@@ -134,31 +134,25 @@
 // };
 
 
-
 import React, { useEffect, useState } from "react";
-import Dash from "./Dash";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [auth, setAuth] = useState(false);
-  const [name, setname] = useState('')
-  const [image , setimage] = useState('');
-
-  
+  const [name, setName] = useState('');
+  const [image, setImage] = useState('');
 
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/auth/user')
       .then(res => {
-
         if (res.data.Status === "Success") {
           setAuth(true);
-          setname(res.data.name);
-          setimage(res.data.profile);
+          setName(res.data.name);
+          setImage(res.data.profile);
         } else {
           setAuth(false);
           navigate('/login');
@@ -172,10 +166,11 @@ const Dashboard = () => {
       {
         auth ? 
           <div> 
-            <h1>hello {name}</h1>
-            <img src={require(`./uploads/${image}`)} alt="" />
-            <h1>{image}</h1>
-            <h1>you are logged in successfully</h1>
+            <h1>Hello {name}</h1>
+
+            <img src={`http://localhost:3000/uploads/${image}`} alt="Profile" />
+       
+            <h1>You are logged in successfully</h1>
           </div>
           : null
       }
@@ -184,4 +179,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
