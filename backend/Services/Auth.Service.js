@@ -41,11 +41,6 @@ const createUser = async (req) => {
     return rows;
 };
 
-
-
-
-
-
 const login = async (username, password) => {
   const [users] = await db.query('SELECT * FROM users WHERE user_name = ?', [username]);
 
@@ -67,11 +62,20 @@ const login = async (username, password) => {
 };
 
 
-
+const getUserById = async (id) => {
+  const query = 'SELECT * FROM users WHERE user_id = ?';
+  try {
+    const [rows, fields] = await db.query(query, [id]);
+    return rows;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
 
 module.exports = {
     createUser,
   login,
+  getUserById
 
 };
 

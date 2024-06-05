@@ -34,56 +34,51 @@ console.log('JWT Secret:', process.env.JWT_SECRET); // Add this line to check if
 
 
 
-const verifyUser = (req, res, next) => {
-  const token = req.cookies.token;
-  if (!token) {
-    return res.json({ Error: "You are not authenticated" });
-  } else {
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      if (err) {
-        return res.json({ Error: "Token is not valid" });
-      } else {
-        req.id = decoded.id;
-        console.log(req.id);
-        next();
-      }
-    });
-  }
-};
+// const verifyUser = (req, res, next) => {
+//   const token = req.cookies.token;
+//   if (!token) {
+//     return res.json({ Error: "You are not authenticated" });
+//   } else {
+//     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+//       if (err) {
+//         return res.json({ Error: "Token is not valid" });
+//       } else {
+//         req.id = decoded.id;
+//         console.log(req.id);
+//         next();
+//       }
+//     });
+//   }
+// };
 
 
+// // Route to get authenticated user information
+// app.get('/api/auth/user', verifyUser, async (req, res) => {
+//   const query = 'SELECT * FROM users WHERE user_id = ?';
 
+//   try {
+//     const [rows, fields] = await db.query(query, [req.id]);
 
+//     if (rows.length === 0) {
+//       return res.status(404).json({ Error: "User not found" });
+//     }
 
+//     // Log the results to debug
+//     console.log(rows);
 
+//     return res.json({
+//       Status: "Success",
+//       name: rows[0].user_name,
+//       email: rows[0].user_email,
+//       profile:rows[0].user_profile
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     return res.status(500).json({ Error: "Internal server error" });
+//   }
+// });
 
-// Route to get authenticated user information
-app.get('/api/auth/user', verifyUser, async (req, res) => {
-  const query = 'SELECT * FROM users WHERE user_id = ?';
-
-  try {
-    const [rows, fields] = await db.query(query, [req.id]);
-
-    if (rows.length === 0) {
-      return res.status(404).json({ Error: "User not found" });
-    }
-
-    // Log the results to debug
-    console.log(rows);
-
-    return res.json({
-      Status: "Success",
-      name: rows[0].user_name,
-      email: rows[0].user_email,
-      profile:rows[0].user_profile
-    });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ Error: "Internal server error" });
-  }
-});
-
-// app.use('/uploads', express.static(path.join(__dirname, 'backend/uploads')));
+// // app.use('/uploads', express.static(path.join(__dirname, 'backend/uploads')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 

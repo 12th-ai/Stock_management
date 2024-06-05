@@ -5,10 +5,7 @@ const cors = require('cors');
 const multer = require('multer');
 const authControllers = require('../Controllers/authController');
 
-
-// const verifyToken = require('../middlewares/verifyToken');
-
-const verifyUser = require('../Middleware/verifyUser')
+const verifyUser = require('../Middleware/verifyUser');
 
 
 
@@ -25,6 +22,8 @@ const upload = multer({ storage: storage });
 
 router.post('/api/auth/', upload.single("image"), authControllers.CreateAcount);
 router.post('/api/auth/login/', authControllers.login);
+router.get('/api/auth/user/', verifyUser, authControllers.getUserInfo);
+
 
 // router.get('/api/auth/user/', verifyToken, authController.getUser);
 

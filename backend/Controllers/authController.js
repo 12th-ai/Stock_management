@@ -24,10 +24,23 @@ const login = async (req, res, next) => {
     }
 };
 
-const getUserInfo = (req, res) => {
-    const username = req.name; // Provided by the middleware
-    const user = authServices.getUser(username);
-    return res.json({ Status: "Success", name: user.name });
+const getUserInfo = async (req, res) => {
+    try {
+      const rows = await authServices.getUserById(req.id);
+      if (rows.length === 0) {
+        return res.status(404).json({ Error: "User not found" });
+      }
+      console.log(rows);
+      return res.json({
+        Status: "Success",
+        name: rows[0].user_name,
+        email: rows[0].user_email,
+        profile: rows[0].user_profile
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ Error: "Internal server error" });
+    }
   };
 
 module.exports = {
