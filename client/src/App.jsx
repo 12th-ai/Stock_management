@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Login from './component/Auth/Login';
 import Register from './component/Auth/Register'; 
+
 import Dashboard from './Dashboard';
 import Data_summary from './component/layout/Data_summary';
 
@@ -31,6 +32,7 @@ const App = () => {
     <Routes>
     <Route path='/register' element={<Register />} />
      <Route path='/login' element={<Login />} />
+ 
       <Route path='/' element={<Dashboard />} >
     
         <Route index element={<Data_summary />} />

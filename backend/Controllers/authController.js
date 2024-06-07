@@ -43,8 +43,23 @@ const getUserInfo = async (req, res) => {
     }
   };
 
+  const logout = (req, res) => {
+    authServices.logout(req, res);
+};
+
+ const getUserCount = async (req, res) => {
+  try {
+      const count = await authServices.getUserCount();
+      res.status(200).json({ count });
+  } catch (error) {
+      res.status(500).json({ message: 'Error retrieving user count', error });
+  }
+};
+
 module.exports = {
     CreateAcount,
     login,
-    getUserInfo
+    getUserInfo,
+    logout,
+    getUserCount
 };

@@ -1,38 +1,57 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-// import '../styles/TopNav.css';  // Assuming you have a separate CSS file for styling
+
+import { NavLink,Link,Outlet,useNavigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import axios from "axios";
+
 
 function TopNav() {
-  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  const [auth, setAuth] = useState(false);
+  const [name, setName] = useState('');
+  const [image, setImage] = useState('');
+
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/api/auth/user', { withCredentials: true });
-        setUser(response.data);
-      } catch (error) {
-        console.error('Error fetching user:', error.response ? error.response.data.message : error.message);
-      }
-    };
+    axios.get('http://localhost:3000/api/auth/user')
+      .then(res => {
+        if (res.data.Status === "Success") {
+          setAuth(true);
+          setName(res.data.name);
+          setImage(res.data.profile);
+        } else {
+          setAuth(false);
+          navigate('/login');
+        }
+      })
+      .catch(error => console.error(error));
+  }, [navigate]);
 
-    fetchUser();
-  }, []);
 
   return (
+    <div>
+      {auth?
+    
     <div className="topNav">
+      
       <div className="nav-l">
         <h1>MONARCH</h1>
       </div>
       <div className="account">
-        {user ? (
-          <>
-            <img src={user.profilePicture} alt="Profile" title='profile' />
-            <span>Welcome, {user.user_name}</span>
-          </>
-        ) : (
-          <span>Loading...</span>
-        )}
+     
+
+      <><h1>Hello {name}</h1>
+
+            <img src={`http://localhost:3000/uploads/${image}`} alt="Profile" />
+ 
+             </>
       </div>
+
+    </div>
+
+:null 
+      }
     </div>
   );
 }

@@ -72,10 +72,29 @@ const getUserById = async (id) => {
   }
 };
 
+
+ const logout = (req, res) => {
+  res.clearCookie('token'); // Clear the authentication token cookie
+  res.status(200).json({ message: 'Logged out successfully' });
+};
+
+const getUserCount = async () => {
+  const query = 'SELECT COUNT(*) AS user_id FROM users';
+  try {
+      const [rows] = await db.query(query);
+      return rows[0].user_id;
+  } catch (err) {
+      throw new Error('Database query failed: ' + err.message);
+  }
+};
+
+
 module.exports = {
     createUser,
   login,
-  getUserById
+  getUserById,
+  logout,
+  getUserCount
 
 };
 
