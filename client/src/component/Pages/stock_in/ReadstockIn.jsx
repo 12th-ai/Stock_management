@@ -14,7 +14,7 @@ const ReadStockIn = () => {
     }, [page]);
 
     const fetchAllStockData = async () => {
-        console.log('Fetching all stock data...');
+        // console.log('Fetching all stock data...');
         try {
             const params = {
                 page,
@@ -62,16 +62,21 @@ const ReadStockIn = () => {
     //     }
     // };
 
-    const handleDelete = async (id) => {
+
+    const handleDelete = async (stock_id) => {
+        console.log(`Attempting to delete stock with ID: ${stock_id}`); // Debug log
+    
         try {
-            await axios.delete(`http://localhost:3000/api/stock_in/${id}`);
-            fetchAllStockData(); // Refresh data after deletion
+            const response = await axios.delete(`http://localhost:3000/api/stock_in/${stock_id}`);
+            console.log(response.data.message);
+             fetchAllStockData(); // Refresh data after deletion if needed
         } catch (error) {
             console.error('Error deleting stock:', error);
         }
     };
+    
 
-    const handleSearchChange = (e) => {
+    const handleSearchChange = (e) => { 
         setSearch(e.target.value);
     };
 
@@ -145,7 +150,7 @@ const ReadStockIn = () => {
                                 </thead>
                                 <tbody>
                                     {stocks && stocks.map((stock, index) => (
-                                        <tr key={stock.id}>
+                                        <tr key={stock.stock_id}>
                                             <td>{index + 1 + (page - 1) * 5}</td>
                                             <td>{stock.product_code}</td>
                                             <td>{stock.product_name}</td>
@@ -156,8 +161,8 @@ const ReadStockIn = () => {
                                             <td>{stock.owner}</td>
                                             <td>{formatDate(stock.date)}</td>
                                             <td>
-                                                <Link to={`updatestockin/${stock.id}`}>Update</Link>
-                                                <button onClick={() => handleDelete(stock.id)} style={{ backgroundColor: "#d0342c", color: "white", marginLeft: "20px" }}>Delete</button>
+                                                <Link to={`updatestockin/${stock.stock_id}`}>Update</Link>
+                                                <button onClick={() => handleDelete(stock.stock_id)} style={{ backgroundColor: "#d0342c", color: "white", marginLeft: "20px" }}>Delete</button>
                                             </td>
                                         </tr>
                                     ))}

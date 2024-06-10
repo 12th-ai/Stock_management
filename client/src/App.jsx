@@ -39,7 +39,7 @@ const App = () => {
         <Route path='stockin' element={<Mainstockin />}>
           <Route index element={<ReadStockIn />} />
           <Route path='addstockin' element={<AddStockIn />} />
-          <Route path='updatestockin' element={<UpdateStockIn />} />
+          <Route path='updatestockin/:stock_id' element={<UpdateStockIn />} />
         </Route> 
          <Route path='stockout' element={<Mainstockout />}>
            <Route index element={<ReadStockout />} />
