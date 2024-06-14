@@ -3,7 +3,7 @@ const authServices = require('../Services/Auth.Service');
 const CreateAcount = async (req, res, next) => {
     try {
         const userId = await authServices.createUser(req);
-        res.json({ message: 'User created successfully', userId });
+        res.json({ message: 'Account created successfully', userId });
     } catch (error) {
         if (error.message === 'User already exists') {
             return res.status(409).json({ message: error.message });

@@ -21,7 +21,7 @@ const createUser = async (req) => {
     const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
 
     // Use a default emoji if no image file is provided
-    const profileImage = req.file ? req.file.filename : '😊'; // Default emoji
+    const profileImage = req.file ? req.file.filename : 'image_1718180736357.avif'; // Default image filename
 
     // Construct values array with hashed password
   
@@ -33,6 +33,7 @@ const createUser = async (req) => {
                 dob,
                privilege,
                profileImage
+
              ];
     // Insert user data into the database
     const [rows] = await db.query('INSERT INTO users (name,user_name,user_email,user_password,dob,privillage,user_profile) VALUES (?) ', [values]);

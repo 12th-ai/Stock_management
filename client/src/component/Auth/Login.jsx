@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-// import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
   const [values, setValues] = useState({
     username: '',
@@ -11,16 +11,20 @@ const Login = () => {
   });
  
 const [message, setMessage] = useState('');
-
-const navigate = useNavigate(); // Create the navigate function inside the component
+const navigate = useNavigate(); // Initialize useNavigate
 
 const handleSubmit = async (e) => {
   e.preventDefault();
   
   try {
     const response = await axios.post('http://localhost:3000/api/auth/login', values, { withCredentials: true });
-    // toast.success(response.data.message, { autoClose: 10000 });
-    navigate('/'); // Navigate to the dashboard
+    
+      toast.success(response.data.message, {
+          autoClose: 2500 // Notification will be displayed for 2 seconds
+      });
+      setTimeout(() => {
+          navigate('/'); // Redirect to login page after 2 seconds
+      }, 3500);
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
       toast.error(error.response.data.message, { autoClose: 10000 });

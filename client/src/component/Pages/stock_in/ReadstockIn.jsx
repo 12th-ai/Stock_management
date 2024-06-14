@@ -1,107 +1,226 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 
 const ReadStockIn = () => {
+    // const [stocks, setStocks] = useState([]);
+    // const [page, setPage] = useState(1);
+    // const [totalPages, setTotalPages] = useState(1);
+    // const [search, setSearch] = useState('');
+    // const [dateRange, setDateRange] = useState({ from: '', to: '' });
+
+    // useEffect(() => {
+    //     fetchAllStockData();
+    // }, [page]);
+
+    // const fetchAllStockData = async () => {
+    //     // console.log('Fetching all stock data...');
+    //     try {
+    //         const params = {
+    //             page,
+    //             limit: 5
+    //         };
+    //         const { data } = await axios.get('http://localhost:3000/api/stock_in', { params });
+    //         setStocks(data.data || []);
+    //         setTotalPages(Math.ceil(data.count / 5));
+    //     } catch (error) {
+    //         console.error('Error fetching stock data:', error);
+    //     }
+    // };
+
+    // // const fetchFilteredStockData = async () => {
+     
+    // //     try {
+    // //         const params = {
+    // //             page: 1, // Reset to first page for new search
+    // //             limit: 5,
+    // //             from: dateRange.from || undefined, 
+    // //             to: dateRange.to || undefined  
+    // //         };
+    // //         const { data } = await axios.get('http://localhost:3000/api/stock_in/search', { params });
+    // //         setStocks(data.data || []);
+    // //         setTotalPages(Math.ceil(data.count / 5));
+    // //         console.log(data.data);
+    // //     } catch (error) {
+    // //         console.error('Error fetching filtered stock data:', error);
+    // //     }
+    // // };
+
+ 
+
+    // const handleDelete = async (stock_id) => {
+    //     console.log(`Attempting to delete stock with ID: ${stock_id}`); // Debug log
+    
+    //     try {
+    //         const response = await axios.delete(`http://localhost:3000/api/stock_in/${stock_id}`);
+    //         console.log(response.data.message);
+    //          fetchAllStockData(); // Refresh data after deletion if needed
+    //     } catch (error) {
+    //         console.error('Error deleting stock:', error);
+    //     }
+    // };
+    
+
+    // const handleSearchChange = (e) => { 
+    //     setSearch(e.target.value);
+    // };
+
+    // const handleDateChange = (e) => {
+    //     setDateRange({ ...dateRange, [e.target.name]: e.target.value });
+    // };
+
+    // const handleFilterSubmit = (e) => {
+    //     e.preventDefault();
+    //     fetchFilteredStockData();
+    // };
+
+    // const handleSearchSubmit = (e) => {
+    //     e.preventDefault();
+    //     fetchSearchStockData();
+    // };
+
+    // const formatDate = (dateString) => {
+    //     const date = new Date(dateString);
+    //     const year = date.getFullYear();
+    //     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    //     const day = String(date.getDate()).padStart(2, '0');
+    //     return `${year}-${month}-${day}`;
+    // };
+
+
+    // const fetchFilteredStockData = async () => {
+    //   try {
+    //     const params = {
+    //       page: 1,
+    //       limit: 5,
+    //       from: dateRange.from || undefined,
+    //       to: dateRange.to || undefined,
+    //     };
+    //     const { data } = await axios.get('http://localhost:3000/api/stock_in/search', { params });
+    //     setStocks(data.data || []);
+    //     setTotalPages(Math.ceil(data.count / 5));
+    //     console.log(data.data);
+    //   } catch (error) {
+    //     console.error('Error fetching filtered stock data:', error);
+    //   }
+    // };
+  
+    // useEffect(() => {
+    //   fetchFilteredStockData();
+    // }, [dateRange]);
+
+
     const [stocks, setStocks] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [search, setSearch] = useState('');
     const [dateRange, setDateRange] = useState({ from: '', to: '' });
-
+ 
+  
+    axios.defaults.withCredentials = true;
+ 
+  
     useEffect(() => {
+     
         fetchAllStockData();
+    
     }, [page]);
 
+
     const fetchAllStockData = async () => {
-        // console.log('Fetching all stock data...');
-        try {
-            const params = {
-                page,
-                limit: 5
-            };
-            const { data } = await axios.get('http://localhost:3000/api/stock_in', { params });
-            setStocks(data.data || []);
-            setTotalPages(Math.ceil(data.count / 5));
-        } catch (error) {
-            console.error('Error fetching stock data:', error);
-        }
-    };
-
-    const fetchFilteredStockData = async () => {
+      try {
+        const params = {
+          page,
+          limit: 5,
+         
+        };
+        const { data } = await axios.get('http://localhost:3000/api/stock_in', { params });
+        setStocks(data.data || []);
+        setTotalPages(Math.ceil(data.count / 5));
      
-        try {
-            const params = {
-                page: 1, // Reset to first page for new search
-                limit: 5,
-                from: dateRange.from || undefined, 
-                to: dateRange.to || undefined  
-            };
-            const { data } = await axios.get('http://localhost:3000/api/stock_in/search', { params });
-            setStocks(data.data || []);
-            setTotalPages(Math.ceil(data.count / 5));
-            console.log(data.data);
-        } catch (error) {
-            console.error('Error fetching filtered stock data:', error);
-        }
+      } catch (error) {
+        console.error('Error fetching stock data:', error);
+      }
     };
-
-    // const fetchSearchStockData = async () => {
-    //     console.log('Fetching searched stock data...');
-    //     try {
-    //         const params = {
-    //             page: 1, // Reset to first page for new search
-    //             limit: 5,
-    //             q: search || undefined
-    //         };
-    //         const { data } = await axios.get('http://localhost:3000/api/stock_in/search', { params });
-    //         setStocks(data.data || []);
-    //         setTotalPages(Math.ceil(data.count / 5));
-    //     } catch (error) {
-    //         console.error('Error fetching searched stock data:', error);
-    //     }
-    // };
-
-
+  
+    // Fetch filtered stock data by date
+    const fetchFilteredStockDataByDate = async () => {
+      try {
+        const params = {
+          page: 1, // Reset to first page for new search
+          limit: 5,
+          from: dateRange.from || undefined,
+          to: dateRange.to || undefined,
+          
+        };
+        const { data } = await axios.get('http://localhost:3000/api/stock_in/search', { params });
+        setStocks(data.data || []);
+        setTotalPages(Math.ceil(data.count / 5));
+      } catch (error) {
+        console.error('Error fetching filtered stock data:', error);
+      }
+    };
+  
+    // Fetch filtered stock data by search term
+    const fetchFilteredStockDataByTerm = async () => {
+      try {
+        const params = {
+          page: 1, // Reset to first page for new search
+          limit: 5,
+          term: search || undefined,
+        
+        };
+        const { data } = await axios.get('http://localhost:3000/api/stock_in/search/term', { params });
+        setStocks(data.data || []);
+        setTotalPages(Math.ceil(data.count / 5));
+      } catch (error) {
+        console.error('Error fetching filtered stock data:', error);
+      }
+    };
+  
+  
+    // Fetch filtered data by date range when dateRange changes
+    useEffect(() => {
+      fetchFilteredStockDataByDate();
+    }, [dateRange]);
+  
     const handleDelete = async (stock_id) => {
-        console.log(`Attempting to delete stock with ID: ${stock_id}`); // Debug log
-    
-        try {
-            const response = await axios.delete(`http://localhost:3000/api/stock_in/${stock_id}`);
-            console.log(response.data.message);
-             fetchAllStockData(); // Refresh data after deletion if needed
-        } catch (error) {
-            console.error('Error deleting stock:', error);
-        }
+      try {
+        const response = await axios.delete(`http://localhost:3000/api/stock_in/${stock_id}`);
+        console.log(response.data.message);
+        fetchAllStockData(); // Refresh data after deletion if needed
+      } catch (error) {
+        console.error('Error deleting stock:', error);
+      }
     };
-    
-
-    const handleSearchChange = (e) => { 
-        setSearch(e.target.value);
+  
+    const handleSearchChange = (e) => {
+      setSearch(e.target.value);
     };
-
+  
     const handleDateChange = (e) => {
-        setDateRange({ ...dateRange, [e.target.name]: e.target.value });
+      setDateRange({ ...dateRange, [e.target.name]: e.target.value });
     };
-
+  
     const handleFilterSubmit = (e) => {
-        e.preventDefault();
-        fetchFilteredStockData();
+      e.preventDefault();
+      fetchFilteredStockDataByDate();
     };
-
+  
     const handleSearchSubmit = (e) => {
-        e.preventDefault();
-        fetchSearchStockData();
+      e.preventDefault();
+      fetchFilteredStockDataByTerm();
     };
-
+  
     const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
+      const date = new Date(dateString);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
     };
-
+    
+  
     return (
         <div className="router">
             <div className="router-page">
@@ -141,8 +260,8 @@ const ReadStockIn = () => {
                                         <th>Product Name</th>
                                         <th>Price</th>
                                         <th>Supplier</th>
-                                        <th>Quantity</th>
-                                        <th>Amount</th>
+                                        <th>amount</th>
+                                        <th>total price</th>
                                         <th>Register</th>
                                         <th>Date</th>
                                         <th>Actions</th>
@@ -155,7 +274,7 @@ const ReadStockIn = () => {
                                             <td>{stock.product_code}</td>
                                             <td>{stock.product_name}</td>
                                             <td>{stock.unit_price}</td>
-                                            <td>{stock.owner}</td>
+                                            <td>{stock.suppliers}</td>
                                             <td>{stock.amount}</td>
                                             <td>{stock.total_price}</td>
                                             <td>{stock.owner}</td>

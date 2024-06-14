@@ -43,12 +43,6 @@ const getstock_in_Count = async () => {
   };
    
 
-  const getAllStocks = async ({ page, limit }) => {
-    const offset = (page - 1) * limit;
-    const [result] = await db.query('SELECT * FROM stock_in LIMIT ? OFFSET ?', [parseInt(limit), parseInt(offset)]);
-    const [count] = await db.query('SELECT COUNT(*) AS stock_id FROM stock_in');
-    return { data: result, count: count[0].stock_id };
-};
 
 
 
@@ -64,26 +58,6 @@ const deleteStock = async (stockId) => {
 };
 
 
-
-const searchStock = async ({ from, to, q }) => {
-    let query = 'SELECT * FROM stock_in WHERE 1=1';
-    const params = [];
-    if (from) {
-        query += ' AND date >= ?';
-        params.push(from);
-    }
-    if (to) {
-        query += ' AND date <= ?';
-        params.push(to);
-    }
-    if (q) {
-        query += ' AND (product_code LIKE ? OR product_name LIKE ?)';
-        params.push(`%${q}%`, `%${q}%`);
-    }
-    const [result] = await db.query(query, params);
-    return result;
-};
-
 const getStockById = async (stockId) => {
     try {
         const [rows] = await db.query('SELECT * FROM stock_in WHERE stock_id = ?', [stockId]);
@@ -95,12 +69,62 @@ const getStockById = async (stockId) => {
 };
 
 
+ const fetchAllStockData = async ({page, limit}) => {
+  const offset = (page - 1) * limit;
+  const [rows] = await db.query('SELECT * FROM stock_in LIMIT ? OFFSET ?', [parseInt(limit), parseInt(offset)]);
+  const [count ] = await db.query('SELECT COUNT(*) AS stock_id FROM stock_in');
+  return { data: rows, count: count[0].stock_id };
+};
+//   const getAllStocks = async ({ page, limit }) => {
+//     const offset = (page - 1) * limit;
+//     const [result] = await db.query('SELECT * FROM stock_in LIMIT ? OFFSET ?', [parseInt(limit), parseInt(offset)]);
+//     const [count] = await db.query('SELECT COUNT(*) AS stock_id FROM stock_in');
+//     return { data: result, count: count[0].stock_id };
+// };
+
+
+ const fetchFilteredStockDataByDate = async ({page, limit, from, to}) => {
+  const offset = (page - 1) * limit;
+  let query = 'SELECT * FROM stock_in WHERE 1=1';
+  let countQuery = 'SELECT COUNT(*) AS stock_id FROM stock_in WHERE 1=1';
+  const params = [];
+
+  if (from) {
+    query += ' AND date >= ?';
+    countQuery += ' AND date >= ?';
+    params.push(from);
+  }
+  if (to) {
+    query += ' AND date <= ?';
+    countQuery += ' AND date <= ?';
+    params.push(to);
+  }
+
+  query += ' LIMIT ? OFFSET ?';
+  params.push(parseInt(limit), parseInt(offset));
+
+  const [rows] = await db.query(query, params);
+  const [count] = await db.query(countQuery, params);
+  return { data: rows, count: count[0].stock_id };
+};
+
+const fetchFilteredStockDataByTerm = async (page, limit, term) => {
+  const offset = (page - 1) * limit;
+  const params = [`%${term}%`, parseInt(limit), parseInt(offset)];
+
+  const [rows] = await db.query('SELECT * FROM stock_in WHERE product_code LIKE ? LIMIT ? OFFSET ?', params);
+  const [count ] = await db.query('SELECT COUNT(*) AS stock_id FROM stock_in WHERE product_code LIKE ?', [`%${term}%`]);
+  return { data: rows, count: count[0].stock_id };
+};
+
+
 module.exports = {
     addStock,
-    getAllStocks,
     deleteStock,
     updateStock,
     getstock_in_Count,
-    searchStock,
-    getStockById
+    getStockById,
+    fetchAllStockData,
+    fetchFilteredStockDataByDate,
+    fetchFilteredStockDataByTerm
 };

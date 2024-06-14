@@ -1244,4 +1244,10 @@ aside nav a.active {
 
 .Toastify__progress-bar {
   background: white !important;
+}
+
+.button-logout {
+  background-color: transparent;
+  border: none;
+  color: white;
 }/*# sourceMappingURL=App.css.map */
